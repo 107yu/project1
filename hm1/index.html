@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>串行并行加载十张图片</title>
+    <style>
+        .box1{
+            padding: 10px;
+            background: skyblue;
+        }
+        .box2{
+            padding: 10px;
+            border:1px solid red;
+        }
+        img{
+            width: 100px;
+            height: 100px;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box1"></div>   
+    <div class="box2"></div>
+</body>
+<script>
+    let box1=document.querySelector(".box1")
+    let box2=document.querySelector(".box2")
+    let arr=["/img/1.jpg","/img/2.jpg","/img/3.jpg","/img/4.jpg","/img/b1.jpg",
+            "/img/b2.jpg","/img/b3.jpg","/img/b4.jpg","/img/b5.jpg","/img/d2.jpg",];
+
+    //串行：一个执行完后执行下一个；
+    let p=(src,box)=>{
+        return new Promise((resolve,reject)=>{
+            let img=document.createElement("img");
+            img.src=src;
+            box.appendChild(img)
+            setTimeout(resolve,2000)
+        })
+    }
+
+    async function createImg(arr){
+        for(let i=0;i<arr.length;i++){
+            await p(arr[i],box1)
+        }
+    }
+    createImg(arr)
+    // 并行---一起执行,前面代码堵塞不会影响后面的执行；
+    arr.forEach(async function(item,index){
+        if(index===2){
+           await  setTimeout(()=>{
+                p(item,box2)
+            },3000)
+        }
+       else{
+        await p(item,box2)
+       }
+    })
+</script>
+</html>
