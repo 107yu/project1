@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box .box1{
+            width:700px;
+            height:400px;
+            border:2px solid #f99;
+            display:flex;
+            flex-wrap:wrap;
+        }
+        img{
+            width:100px;
+            height:100px;
+            margin:10px;
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box1"></div>
+    <script>
+        let box=document.querySelector(".box")
+        let box1=document.querySelector(".box1")
+        //串行 同步
+        function loadImageAsync(url){
+	        return new Promise((resolve,reject)=>{
+                let image=new Image();
+                setTimeout(()=>{
+                    image.src=url;
+                    box.appendChild(image)
+                },2000)
+              
+                image.onload=function(){
+                    resolve("成功");
+                };
+                image.onerror=function(){
+                    reject(new Error('Could not image at'+url));
+                }
+            })
+        }
+        async function Loading(imgs){   //实现同步   解决异步
+            try{
+                for(var i in imgs){
+                    await loadImageAsync(imgs[i])
+                } 
+            }catch(err){
+                err()
+            }
+        }
+        Loading(["./img/1.jpg","http://img95.699pic.com/photo/40146/1836.gif_wh300.gif","./img/2.jpg","./img/3.jpg"])
+        function loadImageAsync1(url){
+	        return new Promise((resolve,reject)=>{
+                let image=new Image();
+                setTimeout(()=>{
+                    image.src=url;
+                    box1.appendChild(image)
+                },2000)
+              
+                image.onload=function(){
+                    resolve("成功");
+                };
+                image.onerror=function(){
+                    reject(new Error('Could not image at'+url));
+                }
+            })
+        }
+        function Loading1(img){
+            img.forEach( async (item,index)=>{
+                if(index===1){
+                    await setTimeout(()=>{
+                         loadImageAsync1(item,index)
+                    },2000)
+
+                }else{
+                    await loadImageAsync1(item)
+                }
+              
+            })
+        }
+    Loading1(["./img/1.jpg","http://img95.699pic.com/photo/40146/1836.gif_wh300.gif","./img/2.jpg","./img/3.jpg"])
+    //并行  异步  谁先加载完先渲染谁
+    
+    
+    </script>
+</body>
+</html>
