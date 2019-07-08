@@ -28,65 +28,44 @@
     <script>
         let box=document.querySelector(".box")
         let box1=document.querySelector(".box1")
-        //串行 同步
-        function loadImageAsync(url){
-	        return new Promise((resolve,reject)=>{
-                let image=new Image();
-                setTimeout(()=>{
-                    image.src=url;
-                    box.appendChild(image)
-                },2000)
-              
-                image.onload=function(){
-                    resolve("成功");
-                };
-                image.onerror=function(){
-                    reject(new Error('Could not image at'+url));
+        let imgs=["./img/1.jpg","http://img95.699pic.com/photo/40146/1836.gif_wh300.gif","./img/2.jpg","./img/3.jpg"]
+        //串行  同步  //一个完成之后才能另外一个
+        function load(url,box){
+            return new Promise((resolve,reject)=>{
+                let img=new Image()
+                img.src=url;
+                img.onload=()=>{
+                    resolve(img)
                 }
+                img.onerror=()=>{
+                    reject("on error")
+                }
+                
+
             })
+
         }
-        async function Loading(imgs){   //实现同步   解决异步
-            try{
-                for(var i in imgs){
-                    await loadImageAsync(imgs[i])
-                } 
-            }catch(err){
-                err()
+        //串行
+        async function loading(imgs){             //1个异步函数
+            for(let i=0;i<imgs.length;i++){
+                let img=await load(imgs[i])
+                box.appendChild(img)
             }
         }
-        Loading(["./img/1.jpg","http://img95.699pic.com/photo/40146/1836.gif_wh300.gif","./img/2.jpg","./img/3.jpg"])
-        function loadImageAsync1(url){
-	        return new Promise((resolve,reject)=>{
-                let image=new Image();
-                setTimeout(()=>{
-                    image.src=url;
-                    box1.appendChild(image)
-                },2000)
-              
-                image.onload=function(){
-                    resolve("成功");
-                };
-                image.onerror=function(){
-                    reject(new Error('Could not image at'+url));
-                }
-            })
-        }
-        function Loading1(img){
-            img.forEach( async (item,index)=>{
-                if(index===1){
-                    await setTimeout(()=>{
-                         loadImageAsync1(item,index)
-                    },2000)
 
-                }else{
-                    await loadImageAsync1(item)
-                }
-              
+        //并行  异步
+        function loading1(imgs){
+            imgs.forEach(async item=>{           //5 个异步函数
+                let img=await load(item)
+                box1.appendChild(img)
+
             })
         }
-    Loading1(["./img/1.jpg","http://img95.699pic.com/photo/40146/1836.gif_wh300.gif","./img/2.jpg","./img/3.jpg"])
-    //并行  异步  谁先加载完先渲染谁
+        loading(imgs)
+        loading1(imgs)
+
     
+
     
     </script>
 </body>
