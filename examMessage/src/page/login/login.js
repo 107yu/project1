@@ -1,12 +1,20 @@
 import React, { Component,useState,useEffect } from 'react'
 import "./login.css"
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox,message} from 'antd';
 import { connect } from 'dva';
 function Login(props){
-    if(props.isLogin){
-        props.history.push("/main")
-    }
-    console.log(props)
+    useEffect(()=>{
+        if(props.isLogin===1){
+            message.success("登陆成功")
+            let path="/main";
+            if(props.history.search){
+                path=decodeURIComponent(props.history.search.split("=")[1]) 
+            }
+            props.history.push(path)
+        }else if(props.isLogin===0){
+            message.error("登陆失败")
+        }
+    },[props.isLogin])
     let {getFieldDecorator}=props.form
     let handleSubmit=(e)=>{
         e.preventDefault();
