@@ -1,15 +1,51 @@
 .layout{
     width: 100%;
     height: 100%;
+   overflow: hidden;
 }
 .header{
     width: 100%;
     height: 64px; 
-    background: #eee;
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+    justify-content: space-between;
+    position: absolute;
+    top:0;
+    left:0;
+    background: #fff;
+}
+.logo{
+    width: 120px;
+    height: 28.2px;
+}
+.logo img{
+    width: 100px;
+}
+.logout{
+   height: 64px;
+}
+.logout span{
+    display: inline-block;
+    padding: 10px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+}
+.logout :hover{
+    background: #ccc;
 }
 .layout_content{
-    width: 100%;
-    height: 100%;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   padding-top: 64px;
+}
+.logout img{
+    border-radius: 50%;
+}
+.ant-dropdown-open{
+    background: #eee!important;
 }
 .slide{
     width:200px;
@@ -18,9 +54,13 @@
     float: left;
     background: #001529;
     font-size: 14px;
+    overflow-y: auto;
 }
 
 .content{
-   padding: 30px;
-    float: left;
+   flex: 1;
+   overflow-y: auto;
 }
+a{
+    color:#000;
+  }

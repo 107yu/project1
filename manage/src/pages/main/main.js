@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import {Route,Link } from 'dva/router';
 import styles from "./main.css"
-import { Menu, Icon } from 'antd';
+import {Layout , Dropdown,Menu, Icon } from 'antd';
 import ClassList from "./checking/classList"
 import Grade from "./classRoom/grade"
 import Room from "./classRoom/room"
@@ -15,13 +15,46 @@ import WatchQuestion from "./question/watchQuestion"
 import AddUser from "./user/addUser"
 import ShowUser from "./user/showUser"
 const { SubMenu } = Menu;
+const menu = (
+  <Menu>
+    <Menu.Item key="0">
+      <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+      个人中心
+      </a>
+    </Menu.Item>
+    <Menu.Item key="1">
+      <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+       我的班级
+      </a>
+    </Menu.Item>
+    <Menu.Divider />
+    <Menu.Item key="3">
+      设置
+    </Menu.Item>
+    <Menu.Item key="4">
+      退出登录
+    </Menu.Item>
+  </Menu>
+ 
+);
+
 function IndexPage() {
   let handleClick = e => {
     console.log('click ', e);
   };
   return (
     <div className={styles.layout}>
-        <div className={styles.header}></div>
+        <div className={styles.header}>
+          <h1 className={styles.logo}><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551624718911&di=4a7004f8d71bd8da84d4eadf1b59e689&imgtype=0&src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg'/></h1>
+          <div className={styles.logout}>
+            <Dropdown overlay={menu}>
+              <span>
+                <a href="#"><img src="https://cdn.nlark.com/yuque/0/2019/png/anonymous/1547609339813-e4e49227-157c-452d-be7e-408ca8654ffe.png?x-oss-process=image/resize,m_fill,w_48,h_48/format,png"/></a>
+                chenmanjie
+              </span>
+            </Dropdown>
+          </div>
+        </div>
         <div className={styles.layout_content}>
           <div className={styles.slide}>
             <Menu
