@@ -15,7 +15,6 @@ import Room from "../main/classMessage/room"
 import Student from "../main/classMessage/student"
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
-
 function Main(){
     return (
         <div className="home_wrapper">
@@ -25,7 +24,7 @@ function Main(){
                 </div>
                 <div className="home_user"></div>
             </header>
-            <Layout style={{ padding: '24px 0', background: '#fff', height:"100%" }}>
+            <Layout style={{ background: '#fff', height:"100%" }}>
                 <Sider width={200} style={{ background: '#fff' }}>
                 <Menu
                 theme="dark" mode="inline"
@@ -96,7 +95,7 @@ function Main(){
                 </SubMenu>
             </Menu>
             </Sider>
-                <Content style={{ padding: '0 24px', height:"100%"}}>
+                <Content style={{ padding: '0 24px', height:"100%",background:"#f0f2f5"}}>
                     <Route path="/main/addQuestions"  component={AddQuestion}></Route>
                     <Route path="/main/questionsType"  component={QuestionsType}></Route>
                     <Route path="/main/watchQuestions"  component={WatchQuestions}></Route>
@@ -108,7 +107,6 @@ function Main(){
                     <Route path="/main/room"  component={Room}></Route>
                     <Route path="/main/student"  component={Student}></Route>
                     <Route path="/main/examPaperClassmate"  component={ExamPaperClassmate}></Route>
-                    <Redirect to="/main/addQuestions"></Redirect>
                 </Content>
             </Layout>
         </div>

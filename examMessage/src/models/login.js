@@ -35,7 +35,6 @@ export default {
     effects: {
       *login({ payload,type }, { call, put }) {  // eslint-disable-line
         let data=yield call(login,payload)
-        console.log(data)
         if(data.code){
           SetToken(data.token)
         }

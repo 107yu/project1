@@ -1,0 +1,22 @@
+:global{
+    .questions_wrapper{
+        width:100%;
+        height:100%;
+        overflow: hidden;
+        .question_content{
+            width:617px;
+            background: #fff;
+            padding:20px 10px;
+            border-radius:5px;
+        }
+        h2{
+            padding:10px 0;
+            margin:10px 0;
+        }
+    }
+    .questions_table{
+        margin-top:30px;
+    }
+}
+
+
