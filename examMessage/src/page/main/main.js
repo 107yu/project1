@@ -1,7 +1,7 @@
-import React, { Component,useState,useEffect } from 'react'
+import React from 'react'
 import "../main/main.css"
 import { Layout, Menu, Icon } from 'antd';
-import { Router, Route,Link,Redirect } from 'dva/router';
+import { Route,Link,Redirect } from 'dva/router';
 import AddQuestion from "../main/testMessage/addQuestions"
 import QuestionsType from "../main/testMessage/questionsType"
 import WatchQuestions from "../main/testMessage/watchQuestions"
@@ -24,7 +24,6 @@ function Main(){
                     <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551624718911&di=4a7004f8d71bd8da84d4eadf1b59e689&imgtype=0&src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg"/>
                 </div>
                 <div className="home_user"></div>
-
             </header>
             <Layout style={{ padding: '24px 0', background: '#fff', height:"100%" }}>
                 <Sider width={200} style={{ background: '#fff' }}>
