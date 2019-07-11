@@ -22,7 +22,8 @@ function LoginPage(props) {
     }
   }, [props.isLogin]);
 
-  let handleSubmit = () => {
+  let handleSubmit = (e) => {
+    e.preventDefault()
     props.form.validateFields((err, values) => {
       if (!err) {
         props.login({ user_name: values.username, user_pwd: values.password });
@@ -56,7 +57,6 @@ function LoginPage(props) {
               />
             )}
           </Form.Item>
-
           <Form.Item>
             {getFieldDecorator("password", {
               rules: [

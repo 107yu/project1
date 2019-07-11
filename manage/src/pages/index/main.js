@@ -11,6 +11,7 @@ import ClassManagement from "./classManagement/classManagement/classManagement";
 import ClassroomManagement from "./classManagement/classroomManagement/classroomManagement";
 import StudentManagement from "./classManagement/studentManagement/studentManagement";
 import AwaitingApprovalClass from "./markingManagement/awaitingApprovalClass/awaitingApprovalClass";
+import Questions from "./testQuestions/Checktheitem/questions/questions"
 import { connect } from "dva";
 import styles from "./main.scss";
 import { Layout, Menu, Breadcrumb, Icon, Dropdown } from "antd";
@@ -175,6 +176,8 @@ function Homepage(props) {
               path="/main/awaitingApprovalClass"
               component={AwaitingApprovalClass}
             />
+            <Route path="/main/questions/:id" component={Questions}/>
+            
           </Layout>
         </Layout>
       </div>

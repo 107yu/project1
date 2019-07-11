@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "dva";
+import { Router, Route, Switch, Redirect, Link } from "dva/router";
 import styles from "./checkTitem.scss";
-import { Tag, TreeSelect } from "antd";
+import { Row, Col, Tag, Select, Button, TreeSelect, Form } from 'antd';
 import { type } from "os";
+const { Option } = Select;
 const { CheckableTag } = Tag;
-const treeData = [
-  {
-    title: "Node1",
-    value: "0-0",
-    key: "0-0"
-  },
-  {
-    title: "Node2",
-    value: "0-1",
-    key: "0-1"
-  }
-];
 function CheckTheitem(props) {
+  console.log(props)
   let [value, upvalue] = useState(undefined);
+  // let [treeData, upvalue] = useState([]);
   let onChange = value => {
     console.log(value);
     upvalue(value);
@@ -26,13 +18,31 @@ function CheckTheitem(props) {
     props.getData();
     props.getAllLessons();//类型
     props.getAllexamType();//考试类型
+    props.getQuestionsType();//题目类型
+    props.refer();//条件查询
 
   }, []);
-
-  // console.log(props.list)
-  // console.log(props.allthelessons);
-  console.log(props.allexamtype);
- 
+  let handleSubmit = (e) => {
+    e.preventDefault()
+    props.form.validateFields((err, values) => {
+      if (!err) {
+        props.refer(values)
+        console.log("111111111", values);
+      }
+    });
+  };
+  //详情传参
+  let detail = (detail) => {
+    //console.log(detail)
+    props.history.push({
+      pathname: `/main/questions/${detail.questions_id}`,
+      state: {
+        data: detail
+      }
+    })
+  }
+  // // 从Form高阶组件中拿到校验组件
+  const { getFieldDecorator } = props.form;
   return (
     <div className={styles.checkTheitemBox}>
       <h2 className={styles.title}>查看试题</h2>
@@ -43,89 +53,98 @@ function CheckTheitem(props) {
               课程类型:
             </h6>
             <div className={styles.ant_label}>
+              <span>All</span>
               {props.allthelessons.map(tag => {
                 // console.log(tag.subject_text)
                 return (
                   <CheckableTag
                     className={styles.ant_select}
                     key={tag.subject_id}
-                    //   checked={selectedTags.indexOf(tag) > -1}
+                    //  checked={selectedTags.indexOf(tag.subject_id) > -1}
                     onChange={checked => this.handleChange(tag.subject_text, checked)}
                   >
                     {tag.subject_text}
                   </CheckableTag>
                 )
-
               })}
             </div>
           </div>
-
-          <div className={styles.ant_row}>
-            <div className={styles.ant_col}>
-              <h5>考试类型:</h5>
-              <TreeSelect
-                style={{ width: 240 }}
-                value={value}
-                dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-                allexamtype={props.allexamtype}
-                treeData={treeData}
-                placeholder="Please select"
-                treeDefaultExpandAll
-                onChange={onChange}
-              />
+          <Form action="" onSubmit={handleSubmit}>
+            <div className={styles.ant_row}>
+              <Row style={{ width: "100%", display: "flex" }}>
+                  <Form.Item style={{ display: "flex" }}>
+                    <Col span={9}><label style={{ display: 'inline' }}>考试类型:</label>
+                      {getFieldDecorator("exam_id", {
+                        initialValue: ""
+                      })(<Select style={{ width: 180 }}>
+                          {props.allexamtype.map((item, index) => {
+                            return <Option value={item.exam_id} key={item.exam_id}>{item.exam_name}</Option>
+                          })}
+                        </Select>
+                      )}
+                    </Col>
+                  </Form.Item>
+                <Form.Item style={{ display: "flex" }}>
+                  <Col span={9}><label style={{ display: 'inline' }}>题目类型:</label>
+                    {getFieldDecorator("questions_type_id", {
+                      initialValue: ""
+                    })(<Select style={{ width: 180 }}>
+                      {props.questionsType.map((v, k) => {
+                        // console.log(v);
+                        return <Option value={v.questions_type_id} key={v.questions_type_id}>{v.questions_type_text}</Option>
+                      })}
+                    </Select>)
+                    }
+                  </Col>
+                </Form.Item>
+                <Form.Item>
+                  <Col span={6}>
+                    <Button type="primary" htmlType="submit" icon="search" type="primary">
+                      查询
+                    </Button>
+                  </Col>
+                </Form.Item>
+              </Row>
             </div>
-            <div className={styles.ant_col}>
-              <h5>题目类型</h5>
-              <TreeSelect
-                style={{ width: 240 }}
-                value={value}
-                dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-                treeData={treeData}
-                placeholder="Please select"
-                treeDefaultExpandAll
-                onChange={onChange}
-              />
-            </div>
-            <div className={styles.ant_col}>
-              <button className={styles.ant_btn}>
-                <span>查询</span>
-              </button>
-            </div>
-          </div>
+          </Form>
         </div>
       </div>
       <div className={styles.anyLayoutContent}>
         <div className={styles.ant_list}>
           {props.list.map((item, index) => {
             //console.log(item)
-            return (< div className={styles.ant_list_item} key={index}>
-              <div className={styles.ant_list_item_content}>
-                <h4>{item.title}</h4>
-                <div style={{ marginTop: "10px" }}>
-                  <div
-                    style={{ marginBottom: "10px", display: "flex" }}
-                    className={styles.ant_tag_meta}
-                  >
-                    <div className={styles.ant_tag_blue}>{item.questions_type_text}</div>
-                    <div className={styles.ant_tag_geekblue}>javaScript上</div>
-                    <div className={styles.ant_tag_orange}>{item.exam_name}</div>
-                  </div>
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      width: "117px",
-                      color: "#0139fD",
-                      height: "19px"
-                    }}
-                  >
-                    {item.user_name} 发布
+            return (
+              <div className={styles.ant_list_item} key={index} onClick={() => detail(item)}>
+                <div className={styles.ant_list_item_content}>
+                  <h4>{item.title}</h4>
+                  <div style={{ marginTop: "10px" }}>
+                    <div
+                      style={{ marginBottom: "10px", display: "flex" }}
+                      className={styles.ant_tag_meta}
+                    >
+                      <div className={styles.ant_tag_blue}>{item.questions_type_text}</div>
+                      <div className={styles.ant_tag_geekblue}>{item.subject_text}</div>
+                      <div className={styles.ant_tag_orange}>{item.exam_name}</div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "14px",
+                        width: "117px",
+                        color: "#0139fD",
+                        height: "19px"
+                      }}
+                    >
+                      {item.user_name} 发布
                 </span>
+                  </div>
                 </div>
+                <p className={styles.ant_list_item_action}>
+                  <div onClick={() => props.history.push("/main/additem")}>
+                    <a href="#">编辑</a>
+                  </div>
+                </p>
               </div>
-              <p className={styles.ant_list_item_action}>
-                <a href="#">编辑</a>
-              </p>
-            </div>)
+            )
           })}
         </div>
       </div>
@@ -139,6 +158,7 @@ const mapState = state => {
 };
 const mapDispatch = dispatch => {
   return {
+    //所有题
     getData: payload => {
       dispatch({
         type: "checkTheItem/All",
@@ -152,10 +172,25 @@ const mapDispatch = dispatch => {
         payload
       })
     },
-    //所有考试类型
+    //考试类型
     getAllexamType: payload => {
       dispatch({
         type: "checkTheItem/examtype",
+        payload
+      })
+    },
+    //题目类型
+    getQuestionsType: payload => {
+      dispatch({
+        type: "checkTheItem/questionsType",
+        payload
+      })
+    },
+    //条件查询 
+    refer: payload => {
+      //console.log(payload)
+      dispatch({
+        type: "checkTheItem/conditionquery",
         payload
       })
     }
@@ -164,4 +199,4 @@ const mapDispatch = dispatch => {
 export default connect(
   mapState,
   mapDispatch
-)(CheckTheitem);
+)(Form.create()(CheckTheitem));
