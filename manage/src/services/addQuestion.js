@@ -14,5 +14,8 @@ export function questionsType() {
 
 //添加试题:
 export function addquestions(params){
-  return request.post('/exam/questions',params);
+  // console.log("axios---",params)
+  return request.post('/exam/questions',params).catch((err)=>{
+    return err
+  });
 }

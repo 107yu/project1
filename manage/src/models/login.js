@@ -1,5 +1,5 @@
-import {login} from "../services/index"
-import {setToken,getToken,removeToken} from "../utils/index"
+import {login,userInfor} from "../services/index"
+import {setToken,getToken} from "../utils/index"
 import {routerRedux} from "dva/router"
 export default {
   //命名空间：
@@ -35,8 +35,11 @@ export default {
   effects: {
     *login({ payload,type }, { call, put }) {  // eslint-disable-line
           let data=yield call(login,payload)   //返回值data就是登录状态，成功或者失败
+          console.log(data)
           if(data.code===1){
             setToken(data.token)
+            let user=yield call(userInfor)
+            localStorage.setItem("userInfor",JSON.stringify(user))
           }
           //相当于dispatch修改action
           yield put({

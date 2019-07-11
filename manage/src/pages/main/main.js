@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import {Route,Link } from 'dva/router';
 import styles from "./main.css"
-import {Layout , Dropdown,Menu, Icon } from 'antd';
+import {Dropdown,Menu, Icon } from 'antd';
 import ClassList from "./checking/classList"
 import Grade from "./classRoom/grade"
 import Room from "./classRoom/room"
@@ -130,17 +130,19 @@ function IndexPage() {
     );
           </div>
           <div className={styles.content}>
-            <Route path="/main/classlist"  component={ClassList} />
-            <Route path="/main/grade"  component={Grade} />
-            <Route path="/main/room"  component={Room} />
-            <Route path="/main/student"  component={Student} />
-            <Route path="/main/addexam"  component={AddExam} />
-            <Route path="/main/examlist"  component={ExamList} />
-            <Route path="/main/addquestion"  component={AddQuestion} />
-            <Route path="/main/questiontype"  component={QuestionType} />
-            <Route path="/main/watchquestion"  component={WatchQuestion} />
-            <Route path="/main/adduser"  component={AddUser} />
-            <Route path="/main/showuser"  component={ShowUser} />
+                <div className={styles.layout_main}>
+                    <Route path="/main/classlist"  component={ClassList} />
+                    <Route path="/main/grade"  component={Grade} />
+                    <Route path="/main/room"  component={Room} />
+                    <Route path="/main/student"  component={Student} />
+                    <Route path="/main/addexam"  component={AddExam} />
+                    <Route path="/main/examlist"  component={ExamList} />
+                    <Route path="/main/addquestion"  component={AddQuestion} />
+                    <Route path="/main/questiontype"  component={QuestionType} />
+                    <Route path="/main/watchquestion"  component={WatchQuestion} />
+                    <Route path="/main/adduser"  component={AddUser} />
+                    <Route path="/main/showuser"  component={ShowUser} />
+                </div>
           </div>
         </div>
     </div>
