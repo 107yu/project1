@@ -35,7 +35,6 @@ export default {
   effects: {
     *login({ payload,type }, { call, put }) {  // eslint-disable-line
           let data=yield call(login,payload)   //返回值data就是登录状态，成功或者失败
-          console.log(data)
           if(data.code===1){
             setToken(data.token)
             let user=yield call(userInfor)

@@ -1,13 +1,10 @@
-import {} from "../services/index"
+import {watchquestions} from "../services/index"
 export default {
   //命名空间：
   namespace: 'watch',
   //模块状态：
   state: {
-      examType:[],
-      subject:[],
-      questionType:[],
-      addState:-1,
+      questions:[]
   },
   //订阅：
   subscriptions: {
@@ -17,21 +14,21 @@ export default {
   },
   //异步方法：
   effects: {
-    *allType({}, { call, put }) {  // eslint-disable-line 考试类型
-        //   let data=yield call(examType)  
-        //   if(data.code===1){
-        //     yield put({
-        //       type:"examTypeData",
-        //       payload:data.data
-        //     })  
-        //   }
+    *allquestions({}, { call, put }) {  // eslint-disable-line 考试类型
+          let data=yield call(watchquestions)  
+          if(data.code===1){
+            yield put({
+              type:"questionData",
+              payload:data.data
+            })  
+          }
           
     }
   },
   //同步方法：只能在这里修改state
   reducers: {
-    examTypeData(state, action) {
-          return {...state,examType:action.payload}
+    questionData(state, action) {
+          return {...state,questions:action.payload}
     },
     
   },

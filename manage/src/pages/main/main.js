@@ -40,7 +40,7 @@ const menu = (
 
 function IndexPage() {
   let handleClick = e => {
-    console.log('click ', e);
+    
   };
   return (
     <div className={styles.layout}>
