@@ -1,4 +1,4 @@
-import {examType,subject,questionsType,addquestions} from "../services/index"
+import {examType,subject,questionsType,addquestions,editquestions,getDetail} from "../services/index"
 export default {
   //命名空间：
   namespace: 'question',
@@ -8,16 +8,12 @@ export default {
       subject:[],
       questionType:[],
       addState:-1,
-  },
-  //订阅：
-  subscriptions: {
-    setup({ dispatch, history }) {  // eslint-disable-line  
-      
-    },
+      addTime:"",
+      detail:[]
   },
   //异步方法：
   effects: {
-    *examType({}, { call, put }) {  // eslint-disable-line 考试类型
+    *examType({}, { call, put }) {  //  考试类型
           let data=yield call(examType)  
           if(data.code===1){
             sessionStorage.setItem("examType",JSON.stringify(data.data))
@@ -28,7 +24,7 @@ export default {
           }
           
     },
-    *subject({ payload}, { call, put }) {  // eslint-disable-line课程类型
+    *subject({ payload}, { call, put }) {  // 课程类型
           let data=yield call(subject,payload)   
           if(data.code===1){
             sessionStorage.setItem("subjectType",JSON.stringify(data.data))
@@ -38,7 +34,7 @@ export default {
             })  
           }
     },
-    *questionType({ payload}, { call, put }) {  // eslint-disable-line题目类型
+    *questionType({ payload}, { call, put }) {  // 题目类型
           let data=yield call(questionsType,payload)   
           if(data.code===1){
             sessionStorage.setItem("questionType",JSON.stringify(data.data))
@@ -48,21 +44,40 @@ export default {
             })  
           }
     },
-    *addQuestion({ payload}, { call, put }) {  // eslint-disable-line添加试题
+    *addQuestion({ payload,edit,search}, { call, put }) {  // eslint-disable-line添加试题
+      // console.log("-----",edit)
+      if(edit==="修改"){
+          payload.questions_id=search
+          delete payload.user_id
+          console.log(payload)
+        let data=yield call(editquestions,payload) 
+        console.log(data,"修改")
+      }else{
         let data=yield call(addquestions,payload) 
-        console.log(data)
         if(data.code){
           yield put({
             type:"addRequest",
-            payload:data.code
+            payload:data.code,
+           
           }) 
         }else{
           yield put({
             type:"addRequest",
-            payload:data
+            payload:data,
+           
           }) 
         }
   }
+
+      },
+      *detail({payload},{call,put}){
+        let data=yield call(getDetail,payload) 
+        yield put({
+          type:"detailData",
+          payload:data.data
+        })
+      }
+        
   },
   //同步方法：只能在这里修改state
   reducers: {
@@ -76,7 +91,13 @@ export default {
         return {...state,questionType:action.payload}
     },
     addRequest(state,action){
-      return {...state,addState:action.payload}
+      return {...state,addState:action.payload,addTime:new Date()*1}
+    },
+    detailData(state,action){
+      return {...state,detail:action.payload}
+    },
+    reset(state,action){
+      return {...state,addState:-1}
     }
   },
 };
