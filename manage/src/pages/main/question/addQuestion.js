@@ -46,20 +46,18 @@ function AddQuestion(props) {
     let handleSubmit = () => {
         props.form.validateFields((err, values) => {
             if (!err) {
-                let user_id = JSON.parse(localStorage.getItem("userInfor")).data.user_id
+                // console.log(props.userInfor) 以前用本地存储做的
+                // let user_id = JSON.parse(localStorage.getItem("userInfor")).data.user_id
                 let obj = {
                     questions_type_id: values.questionType,
                     questions_stem: values.questions_stem,
                     subject_id: values.subject,
                     exam_id: values.examType,
-                    user_id: user_id,
+                    user_id: props.userInfor.user_id,
                     questions_answer: values.answer,
                     title: values.title
                 }
-                // setInfor(obj)
                 props.addQuestion(obj, edit, search)
-
-
             }
         });
     }
@@ -87,7 +85,6 @@ function AddQuestion(props) {
     let { getFieldDecorator } = props.form
     return (
         <div>
-
             <Form onSubmit={handleSubmit}>
                 <h2> {search ? "修改试题" : "添加试题"}</h2>
                 <div className={styles.question_content}>
@@ -209,7 +206,7 @@ const mapStateToProps = (state) => {
         addState: state.question.addState,
         addTime: state.question.addTime,
         detail: state.question.detail,
-        // addTime: state.question.addTime,
+        userInfor:state.login.userInfo.data,
         ...state.checkTheItem
     }
 }

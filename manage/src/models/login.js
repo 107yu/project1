@@ -1,4 +1,4 @@
-import {login,userInfor} from "../services/index"
+import {login,userInfor,getUserInfor} from "../services/index"
 import {setToken,getToken} from "../utils/index"
 import {routerRedux} from "dva/router"
 export default {
@@ -6,7 +6,8 @@ export default {
   namespace: 'login',
   //模块状态：
   state: {
-      isLogin:-1
+      isLogin:-1,
+      userInfo: {},
   },
   //订阅：
   subscriptions: {
@@ -28,18 +29,24 @@ export default {
             }))
           }
         }
+        if(getToken()){
+           // -------获取用户信息------
+           dispatch({
+            type: 'getUserInfo'
+          })
+        }
       });
     },
   },
   //异步方法：
   effects: {
-    *login({ payload,type }, { call, put }) {  // eslint-disable-line
+    *login({ payload }, { call, put }) {     //登录
           let data=yield call(login,payload)   //返回值data就是登录状态，成功或者失败
           console.log(data)
           if(data.code===1){
             setToken(data.token)
-            let user=yield call(userInfor)
-            localStorage.setItem("userInfor",JSON.stringify(user))
+            let user=yield call(userInfor)    //获取用户信息---进行本地存储
+            localStorage.setItem("userInfor",JSON.stringify(user))  //获取用户信息---进行本地存储
           }
           //相当于dispatch修改action
           yield put({
@@ -47,11 +54,25 @@ export default {
               payload:data.code
           })
     },
+    *getUserInfo(action, {call, put, select}){   //获取用户信息-----
+      let userInfo = yield select(state=>state.login.userInfo);  //判断是否已经获取过了，如果获取过了就不在获取了---
+      if (Object.keys(userInfo).length){
+        return;
+      }
+      let data = yield getUserInfor();       //如果没有获取过，再进行获取用户信息
+      yield put({
+        type: 'updateUserInfo',
+        payload: data
+      })
+    }
   },
   //同步方法：只能在这里修改state
   reducers: {
     updataLogin(state, action) {
           return {...state,isLogin:action.payload}
     },
+    updateUserInfo(state, action){
+      return { ...state, userInfo: action.payload };
+    }
   },
 };
