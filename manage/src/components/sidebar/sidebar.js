@@ -25,57 +25,57 @@ function Sidebar(props) {
                 </span>
               }
             >
-              <Menu.Item key="1"><Link to="/main/addquestion">添加试题</Link></Menu.Item>
-              <Menu.Item key="2"><Link to="/main/questiontype">试题分类</Link></Menu.Item>
-              <Menu.Item key="3"><Link to="/main/watchquestion">查看试题</Link></Menu.Item>
+              <Menu.Item key="1"><Link to="/main/addquestion">{props.intl.formatMessage({id:'router.questions.add'})}</Link></Menu.Item>
+              <Menu.Item key="2"><Link to="/main/questiontype">{props.intl.formatMessage({id:'router.questions.view'})}</Link></Menu.Item>
+              <Menu.Item key="3"><Link to="/main/watchquestion">{props.intl.formatMessage({id:'router.questions.type'})}</Link></Menu.Item>
             </SubMenu>
             <SubMenu
               key="sub2"
               title={
                 <span>
                   <Icon type="user" />
-                  <span>用户管理</span>
+                  <span>{props.intl.formatMessage({id: 'router.user'})}</span>
                 </span>
               }
             >
-              <Menu.Item key="4"><Link to="/main/adduser">添加用户</Link></Menu.Item>
-              <Menu.Item key="5"><Link to="/main/showuser">用户展示</Link></Menu.Item>
+              <Menu.Item key="4"><Link to="/main/adduser">{props.intl.formatMessage({id:'router.user.add'})}</Link></Menu.Item>
+              <Menu.Item key="5"><Link to="/main/showuser">{props.intl.formatMessage({id:'router.user.show'})}</Link></Menu.Item>
             </SubMenu>  
             <SubMenu
               key="sub3"
               title={
                 <span>
                   <Icon type="user" />
-                  <span>考试管理</span>
+                  <span>{props.intl.formatMessage({id:'router.exam'})}</span>
                 </span>
               }
             >
-              <Menu.Item key="6"><Link to="/main/addexam">添加考试</Link></Menu.Item>
-              <Menu.Item key="7"><Link to="/main/examlist">考试列表</Link></Menu.Item>
+              <Menu.Item key="6"><Link to="/main/addexam">{props.intl.formatMessage({id: 'router.exam.add'})}</Link></Menu.Item>
+              <Menu.Item key="7"><Link to="/main/examlist">{props.intl.formatMessage({id:'router.exam.list'})}</Link></Menu.Item>
             </SubMenu>
             <SubMenu
               key="sub4"
               title={
                 <span>
                   <Icon type="project" />
-                  <span>班级管理</span>
+                  <span>{props.intl.formatMessage({id:'router.class'})}</span>
                 </span>
               }
             >
-              <Menu.Item key="8"><Link to="/main/grade">班级管理</Link></Menu.Item>
-              <Menu.Item key="9"><Link to="/main/room">教室管理</Link></Menu.Item>
-              <Menu.Item key="10"><Link to="/main/student">学生管理</Link></Menu.Item>
+              <Menu.Item key="8"><Link to="/main/grade">{props.intl.formatMessage({id:'router.class.grade'})}</Link></Menu.Item>
+              <Menu.Item key="9"><Link to="/main/room">{props.intl.formatMessage({id: 'router.class.room'})}</Link></Menu.Item>
+              <Menu.Item key="10"><Link to="/main/student">{props.intl.formatMessage({id:'router.class.student'})}</Link></Menu.Item>
             </SubMenu>
             <SubMenu
               key="sub5"
               title={
                 <span>
                   <Icon type="project" />
-                  <span>阅卷管理</span>
+                  <span>{props.intl.formatMessage({id:'router.marking'})}</span>
                 </span>
               }
             >
-              <Menu.Item key="11"><Link to="/main/page">待批班级</Link></Menu.Item>
+              <Menu.Item key="11"><Link to="/main/page">{props.intl.formatMessage({id:'router.marking.wait'})}</Link></Menu.Item>
             </SubMenu>
           </Menu>
         </div>

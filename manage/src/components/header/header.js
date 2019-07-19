@@ -86,7 +86,7 @@ function Header(props) {
            <div className={styles.localeProvider}>
               <Select defaultValue="中文"  onChange={()=>{localChange()}} style={{width:120}}>
                 <Option value="中文">中文</Option>
-                <Option value="英语">英语</Option>
+                <Option value="英语">English</Option>
               </Select>
            </div>
            <div className={styles.settings}>
