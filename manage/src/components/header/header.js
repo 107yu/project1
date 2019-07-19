@@ -1,7 +1,10 @@
 import React,{useEffect,useState} from 'react';
 import { connect } from 'dva';
+import {injectIntl} from 'react-intl';
 import styles from "./header.scss"
-import { Dropdown, Menu,Modal,Form,Input,} from 'antd';
+import { Dropdown, Menu,Modal,Form,Input, Select} from 'antd';
+const { Option } = Select;
+
 function Header(props) {
   const {getFieldDecorator} =props.form;
   //划过时出现的下拉框
@@ -71,12 +74,20 @@ function Header(props) {
   useEffect(()=>{
     setImg(props.avatar.path)
   },[props.avatar])
+  //国际化：
+ let localChange=(value)=> {
+   console.log(props.intl)
+    props.changeLocale(props.intl.locale=='en'?'zh':'en')
+  }
   return (
     <div className={styles.header}>
         <h1 className={styles.logo}><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551624718911&di=4a7004f8d71bd8da84d4eadf1b59e689&imgtype=0&src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg' /></h1>
-        <div>
-           <div>
-                国际化
+        <div className={styles.action}>
+           <div className={styles.localeProvider}>
+              <Select defaultValue="中文"  onChange={()=>{localChange()}} style={{width:120}}>
+                <Option value="中文">中文</Option>
+                <Option value="英语">英语</Option>
+              </Select>
            </div>
            <div className={styles.settings}>
             <Dropdown overlay={menu}>
@@ -88,28 +99,30 @@ function Header(props) {
                   </span>
               </Dropdown>
            </div>
+           <div>
+              <Modal
+                title="设置个人信息"
+                visible={visible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+              >
+                <Form>
+                    <Form.Item label="用户名">
+                      {getFieldDecorator('user_name')(<Input />)}
+                    </Form.Item>
+                    <Form.Item label="密码">
+                      {getFieldDecorator('user_pwd')(<Input />)}
+                    </Form.Item>
+                    <Form.Item label="我的头像">
+                      <input type="file" className={styles.ipt} onChange={changeAvatar}/>
+                      <span className={styles.chooseImg}>
+                        <img src={img}/>
+                      </span>
+                    </Form.Item>
+                  </Form>
+              </Modal>
+           </div>
         </div>
-        <Modal
-          title="设置个人信息"
-          visible={visible}
-          onOk={handleOk}
-          onCancel={handleCancel}
-        >
-           <Form>
-              <Form.Item label="用户名">
-                {getFieldDecorator('user_name')(<Input />)}
-              </Form.Item>
-              <Form.Item label="密码">
-                {getFieldDecorator('user_pwd')(<Input />)}
-              </Form.Item>
-              <Form.Item label="我的头像">
-                <input type="file" className={styles.ipt} onChange={changeAvatar}/>
-                <span className={styles.chooseImg}>
-                  <img src={img}/>
-                </span>
-              </Form.Item>
-            </Form>
-        </Modal>
   </div>
   );
 }
@@ -142,7 +155,13 @@ const mapDispatchToProps=(dispatch)=>{
       dispatch({
         type:"login/getUserInfo",
       })
+    },
+    changeLocale: payload=>{
+      dispatch({
+        type: 'global/updateLocale',
+        payload
+      })
     }
   }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Form.create()(Header));
+export default injectIntl(connect(mapStateToProps,mapDispatchToProps)(Form.create()(Header)));

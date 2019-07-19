@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
+import {injectIntl} from 'react-intl';
 import { Link } from 'dva/router';
 import styles from "./sidebar.scss"
 import {Menu, Icon } from 'antd';
@@ -20,7 +21,7 @@ function Sidebar(props) {
               title={
                 <span>
                   <Icon type="mail" />
-                  <span>试题管理</span>
+                  <span>{props.intl.formatMessage({id: 'router.questions'})}</span>
                 </span>
               }
             >
@@ -86,4 +87,4 @@ const mapState = state => {
   };
 };
 
-export default connect(mapState)(Sidebar);
+export default injectIntl(connect(mapState)(Sidebar));

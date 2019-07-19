@@ -15,10 +15,18 @@
     height: 28.2px;
 }
 .logo img{
-    width: 100px;
+    width: 100%;
+}
+.action{
+    display: flex;
+    align-items: center;
+}
+.localeProvider{
+
 }
 .settings{
    height: 64px;
+   margin-left: 30px;
 }
 .avatar{
     border:1px solid skyblue;

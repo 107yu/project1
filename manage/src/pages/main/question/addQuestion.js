@@ -106,7 +106,7 @@ function AddQuestion(props) {
                         <div>
                             <div><label title="题干"> 题目主题</label></div>
                             {getFieldDecorator('questions_stem', { initialValue: search ? detail && detail.questions_stem : "" })(
-                                <Editor></Editor>
+                                <Editor style={{height:200}}></Editor>
                             )}
 
                         </div>
@@ -170,7 +170,7 @@ function AddQuestion(props) {
                     <h3>答案信息</h3>
                     <div>
                         {getFieldDecorator('answer', { initialValue: search ? detail && detail.questions_answer : "" })(
-                            <Editor></Editor>
+                            <Editor style={{height:200}}></Editor>
                         )}
                     </div>
                     <div>
