@@ -42,7 +42,6 @@ export default {
   effects: {
     *login({ payload }, { call, put }) {     //登录
           let data=yield call(login,payload)   //返回值data就是登录状态，成功或者失败
-          console.log(data)
           if(data.code===1){
             setToken(data.token)
             let user=yield call(userInfor)    //获取用户信息---进行本地存储
@@ -61,18 +60,21 @@ export default {
       }
       let data = yield getUserInfor();       //如果没有获取过，再进行获取用户信息
       yield put({
-        type: 'updateUserInfo',
+        type: 'userInfo',
         payload: data
       })
     }
   },
   //同步方法：只能在这里修改state
   reducers: {
-    updataLogin(state, action) {
+    updataLogin(state, action) {  //登录
           return {...state,isLogin:action.payload}
     },
-    updateUserInfo(state, action){
+    userInfo(state, action){  //获取到用户的信息
       return { ...state, userInfo: action.payload };
+    },
+    reset(state){  //重置用户信息
+      return { ...state, userInfo:{} };
     }
   },
 };
