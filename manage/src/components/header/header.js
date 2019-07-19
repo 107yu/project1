@@ -4,6 +4,7 @@ import styles from "./header.scss"
 import { Dropdown, Menu,Modal,Form,Input,} from 'antd';
 function Header(props) {
   const {getFieldDecorator} =props.form;
+  //划过时出现的下拉框
   const menu = (
     <Menu>
       <Menu.Item key="0">
@@ -46,7 +47,7 @@ function Header(props) {
       }
     });
   };
-
+  //弹框：
   let handleOk =()=> {
      setVisible(false)
      handleSubmit()
@@ -73,15 +74,20 @@ function Header(props) {
   return (
     <div className={styles.header}>
         <h1 className={styles.logo}><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551624718911&di=4a7004f8d71bd8da84d4eadf1b59e689&imgtype=0&src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg' /></h1>
-        <div className={styles.settings}>
+        <div>
+           <div>
+                国际化
+           </div>
+           <div className={styles.settings}>
             <Dropdown overlay={menu}>
-                <span>
-                    <b className={styles.avatar}>
-                      <img src={props.userInfo.data&&props.userInfo.data.avatar} />
-                    </b>
-                    {props.userInfo.data&&props.userInfo.data.user_name}
-                </span>
-            </Dropdown>
+                  <span>
+                      <b className={styles.avatar}>
+                        <img src={props.userInfo.data&&props.userInfo.data.avatar} />
+                      </b>
+                      {props.userInfo.data&&props.userInfo.data.user_name}
+                  </span>
+              </Dropdown>
+           </div>
         </div>
         <Modal
           title="设置个人信息"

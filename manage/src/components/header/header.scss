@@ -44,8 +44,9 @@
 }
 .ipt{
     outline: none;
-   
     border:0!important;
+    width: 90px;
+    margin-top:10px;
 }
 .chooseImg{
     display:block;
@@ -54,6 +55,9 @@
     border-radius: 50%;
     overflow: hidden;
     border:0;
+    // position: absolute;
+    // top:-20px;
+    // left:0;
 }
 .chooseImg img{
     width: 100%;
