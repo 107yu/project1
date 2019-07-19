@@ -28,7 +28,6 @@ function addUser(props) {
         <div>
             <h2>添加用户</h2>
             <div className={styles.addUser_wrapper}>
-                {console.log(props)}
                 <AddUser></AddUser>
                 <AddIdentity></AddIdentity>
                 <Addapiport></Addapiport>

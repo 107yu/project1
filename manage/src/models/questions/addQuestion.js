@@ -1,4 +1,4 @@
-import {examType,subject,questionsType,addquestions,editquestions,getDetail} from "../services/index"
+import {examType,subject,questionsType,addquestions,editquestions,getDetail} from "../../services/index"
 export default {
   //命名空间：
   namespace: 'question',

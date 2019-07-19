@@ -76,7 +76,6 @@ function Header(props) {
   },[props.avatar])
   //国际化：
  let localChange=(value)=> {
-   console.log(props.intl)
     props.changeLocale(props.intl.locale=='en'?'zh':'en')
   }
   return (

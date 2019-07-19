@@ -42,7 +42,6 @@ export default {
     //获得所有用户信息
     *getAllUser({}, { put }){
       let data=yield getUserIdentity()
-      console.log(data,"user")
       yield put({
         type:"getUser",
         payload:data.data
@@ -50,7 +49,6 @@ export default {
     },
     //添加用户信息
     *addUserInfo({ payload }, {put }){
-      console.log(payload)
       let data=yield addUser(payload)
       // console.log(data,"adduser")
       yield put({
@@ -85,7 +83,6 @@ export default {
     //添加视图接口
     *setApi({ payload }, { put }){
       let data=yield setApiEdit(payload)
-      console.log(data,"3332")
       yield put({
         type:"msgInfo",
         payload:data.code
@@ -95,7 +92,6 @@ export default {
     //设置视图接口
     *setViewPort({ payload }, { call, put }){
       let data=yield setViewEdit(payload)
-      console.log(data,"2222")
       yield put({
         type:"msgInfo",
         payload:data.code
@@ -104,7 +100,6 @@ export default {
     //设置视图权限
     *addviewAuthority({ payload }, { call, put }){
       let data=yield addViewEdit(payload)
-      console.log(data,"1111")
       yield put({
         type:"msgInfo",
         payload:data.code

@@ -1,4 +1,4 @@
-import { upDateUserInfo,getAvatar } from "../services/index"
+import { upDateUserInfo,getAvatar } from "../../services/index"
 export default {
   //命名空间：
   namespace: 'user',
@@ -18,7 +18,7 @@ export default {
         })
       }
     },
-    *upDateAvatar({payload}, { call, put }) {    //  更新用户头像：
+    *upDateAvatar({payload}, { call, put }) {    // 更新用户头像：
       let data = yield call(getAvatar,payload)
       if (data.code === 1) {
         yield put({

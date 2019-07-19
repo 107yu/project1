@@ -8,7 +8,7 @@ function Page(){
         <div>
             <Route path="/main/page/classList" component={ClassList} />
             <Route path="/main/page/testPaper" component={TestPaper} />
-            <Redirect to="/main/page/classList" />
+            <Redirect exact to="/main/page/classList" />
         </div>
     )
 

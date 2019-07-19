@@ -16,7 +16,26 @@ function Sidebar(props) {
             mode="inline"
             theme="dark"
           >
-            <SubMenu
+            {
+              props.myView.map(item=>{
+                return  <SubMenu
+                          key={item.name}
+                          title={
+                            <span>
+                             <Icon type={item.icon} />
+                              <span>{props.intl.formatMessage({id:item.name})}</span>
+                            </span>
+                          }
+                        >
+                         {
+                           item.children.map(value=>{
+                              return <Menu.Item key={value.name}><Link to={value.path}>{props.intl.formatMessage({id:value.name})}</Link></Menu.Item>
+                           })
+                         }
+                        </SubMenu> 
+                          })
+            }
+            {/* <SubMenu
               key="sub1"
               title={
                 <span>
@@ -76,15 +95,16 @@ function Sidebar(props) {
               }
             >
               <Menu.Item key="11"><Link to="/main/page">{props.intl.formatMessage({id:'router.marking.wait'})}</Link></Menu.Item>
-            </SubMenu>
+            </SubMenu> */}
           </Menu>
         </div>
   );
 }
-const mapState = state => {
+const mapStateToProps = state => {
   return {
-  
+    myView:state.login.myView,
+    forbiddenView:state.login.forbiddenView
   };
 };
 
-export default injectIntl(connect(mapState)(Sidebar));
+export default injectIntl(connect(mapStateToProps)(Sidebar));

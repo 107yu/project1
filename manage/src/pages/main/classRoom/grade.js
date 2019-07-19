@@ -50,7 +50,7 @@ function grade(props) {
 					添加班级
           </Button>
 				<div className="questions_table">
-					<Table columns={columns} dataSource={props.getgrade} size="middle">
+					<Table columns={columns} dataSource={props.getgrade} size="middle" rowKey="grade_name">
 					</Table>
 				</div>
 			</div>
@@ -76,7 +76,7 @@ function grade(props) {
 
 				</Form>
 			</Modal>
-		</div >
+		</div>
 	)
 }
 const mapStateToProps = state => {
@@ -95,7 +95,6 @@ const mapDispatchToProps = dispatch => {
 		// },
 		//已分配教室的班级
 		getassignedgrade: () => {
-			console.log(222)
 			dispatch({
 				type: "grade/assignedroom",
 			})

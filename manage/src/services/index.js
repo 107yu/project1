@@ -7,7 +7,7 @@ export * from "./user/userinfo"  //局部--我自己做的本地存储
 export * from "./questions/addQuestion";
 export * from "./questions/checkTheItem";
 
-export * from "./text";
+export * from "./questions/text";
 export * from "./showUser"
 
 export * from "./classRoom/grade.js"
