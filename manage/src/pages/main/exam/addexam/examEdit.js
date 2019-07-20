@@ -112,6 +112,7 @@ function examEdit (props) {
     )
 }
 const mapStateToProps = (state) => {
+    console.log(state.exam)
     return {
        upstate:state.exam.upDate
     }

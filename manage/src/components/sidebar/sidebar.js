@@ -5,7 +5,6 @@ import { Link } from 'dva/router';
 import styles from "./sidebar.scss"
 import {Menu, Icon } from 'antd';
 const { SubMenu } = Menu;
-
 function Sidebar(props) {
   return (
     <div className={styles.slide}>
@@ -19,21 +18,20 @@ function Sidebar(props) {
             {
               props.myView.map(item=>{
                 return  <SubMenu
-                          key={item.name}
-                          title={
-                            <span>
-                             <Icon type={item.icon} />
-                              <span>{props.intl.formatMessage({id:item.name})}</span>
-                            </span>
-                          }
-                        >
-                         {
-                           item.children.map(value=>{
-                              return <Menu.Item key={value.name}><Link to={value.path}>{props.intl.formatMessage({id:value.name})}</Link></Menu.Item>
-                           })
-                         }
-                        </SubMenu> 
+                        key={item.name}
+                        title={<span>
+                            <Icon type="mail" />
+                            <span>{props.intl.formatMessage({id:item.name})}</span>
+                          </span>
+                        }
+                      >
+                        {
+                          item.children.map(value=>{
+                            return <Menu.Item key={value.name}><Link to={value.path}>{props.intl.formatMessage({id:value.name})}</Link></Menu.Item>
                           })
+                        }
+                      </SubMenu> 
+                        })
             }
             {/* <SubMenu
               key="sub1"
@@ -106,5 +104,4 @@ const mapStateToProps = state => {
     forbiddenView:state.login.forbiddenView
   };
 };
-
 export default injectIntl(connect(mapStateToProps)(Sidebar));

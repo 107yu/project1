@@ -125,7 +125,7 @@ export default {
             children:[
                 {
                     name:"router.marking.wait",
-                    path:"/main/grade",
+                    path:"/main/page",
                     component:Page,
                     view_id:"main-grade"
                 },

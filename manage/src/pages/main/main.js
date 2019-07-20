@@ -3,18 +3,18 @@ import { connect } from 'dva';
 import { Route,Redirect} from 'dva/router';
 import styles from "./main.css"
 import {Spin } from 'antd';
-import Grade from "./classRoom/grade"
-import Room from "./classRoom/room"
-import Student from "./classRoom/student"
-import AddExam from "./exam/addexam/addExam"
-import ExamList from "./exam/examList/eaxmList"
-import AddQuestion from "./question/addQuestion"
-import QuestionType from "./question/questionsType"
-import WatchQuestion from "./question/checkTheitem"
+// import Grade from "./classRoom/grade"
+// import Room from "./classRoom/room"
+// import Student from "./classRoom/student"
+// import AddExam from "./exam/addexam/addExam"
+// import ExamList from "./exam/examList/eaxmList"
+// import AddQuestion from "./question/addQuestion"
+// import QuestionType from "./question/questionsType"
+// import WatchQuestion from "./question/checkTheitem"
 import Questions from "./question/questions/questions"
-import AddUser from "./user/addUser"
-import ShowUser from "./user/showUser"
-import Page from './checking/page';
+// import AddUser from "./user/addUser"
+// import ShowUser from "./user/showUser"
+// import Page from './checking/page';
 import ExamEdit from "./exam/addexam/examEdit"
 import ExamDetail from "./exam/examList/examDetail"
 //引入组件
@@ -27,44 +27,39 @@ function IndexPage(props) {
       <div className={styles.layout_content}>
         <Sidebar></Sidebar>
         <div className={styles.content}>
-          <div className={styles.layout_main}>
+          <div className={styles.layout_main}>        
             {/* <Route path="/main/addquestion" component={AddQuestion} />
             <Route path="/main/questiontype" component={QuestionType} />
             <Route path="/main/watchquestion" component={WatchQuestion} />
-
             <Route path="/main/adduser" component={AddUser} />
             <Route path="/main/showuser" component={ShowUser} />
-
              <Route path="/main/addexam" component={AddExam} />
             <Route path="/main/examlist" component={ExamList}/>
-
             <Route path="/main/grade" component={Grade} />
             <Route path="/main/room" component={Room} />
             <Route path="/main/student" component={Student} /> */}
+            {/* 配置用户拥有的路由 */}
             {
               props.myView.map(item=>{
                 return item.children.map(value=>{
-                  return <Route path={value.path} component={value.component}></Route>
+                  return <Route path={value.path} component={value.component} key={value.path}></Route>
                 })
               })
             }
-            {
+            {/* 配置用户禁止访问的路由 */}
+            {/* {
               props.forbiddenView.map(item=>{
-                return <Redirect path="/403"></Redirect>
+                return <Redirect from={item.path} to="/403"></Redirect>
               })
-            }
-            <Redirect path="/404"></Redirect>
-         
-
-            {/* <Route path="/main/page" component={Page} /> */}
-
+            } */}
+            {/* 配置不存在的路由 */}
+              {/* <Redirect to="/404"></Redirect> */}
             <Route path="/main/questions/:id" component={Questions} />
             <Route path="/main/examEdit" component={ExamEdit} />
             <Route path="/main/examDetail" component={ExamDetail} />
           </div>
           {props.global ? <div className={styles.loading}><Spin /></div> : null}
         </div>
-
       </div>
     </div>
   );
@@ -77,5 +72,4 @@ const mapStateToProps = state => {
     forbiddenView:state.login.forbiddenView
   };
 };
-
 export default connect(mapStateToProps)(IndexPage);
