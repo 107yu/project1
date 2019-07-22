@@ -109,9 +109,6 @@ function Header(props) {
                     <Form.Item label="用户名">
                       {getFieldDecorator('user_name')(<Input />)}
                     </Form.Item>
-                    <Form.Item label="密码">
-                      {getFieldDecorator('user_pwd')(<Input />)}
-                    </Form.Item>
                     <Form.Item label="我的头像">
                       <input type="file" className={styles.ipt} onChange={changeAvatar}/>
                       <span className={styles.chooseImg}>

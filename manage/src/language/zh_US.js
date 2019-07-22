@@ -19,5 +19,5 @@ export default {
 
     'router.marking': '阅卷管理',
     'router.marking.wait': '待批班级',
-   
+    'router.marking.excel':"表格练习"
   }

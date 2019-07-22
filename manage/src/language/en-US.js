@@ -19,5 +19,5 @@ export default {
 
     'router.marking': 'markingManage',
     'router.marking.wait': 'AwaitingClass',
-  
+    'router.marking.excel':"Excel"
   }

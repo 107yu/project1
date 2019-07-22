@@ -14,20 +14,8 @@ import ExamDetail from "../pages/main/exam/examList/examDetail"
 import Grade from "../pages/main/classRoom/grade"
 import Room from "../pages/main/classRoom/room"
 import Student from "../pages/main/classRoom/student"
-
 import Page from '../pages/main/checking/page';
-// {
-//     name:"",
-//     path:"/main/examEdit",
-//     component:ExamEdit,
-//     view_id:"main-examEdit"
-// },
-// {
-//     name:"",
-//     path:"/main/examDetail",
-//     component:ExamDetail,
-//     view_id:"main-examDetail"
-// },
+import Excel from "../pages/main/checking/excel"
 //配置；路由表：
 export default {
     routes:[
@@ -53,6 +41,12 @@ export default {
                     path:"/main/watchquestion",
                     component:WatchQuestion,
                     view_id:"main-watchQuestions"
+                },
+                {
+                    name:"",
+                    path:"/main/questions/:id",
+                    component:Questions,
+                    view_id:"main-questionsDetail"
                 }
            ]
         },
@@ -91,6 +85,17 @@ export default {
                     path:"/main/examlist",
                     component:ExamList,
                     view_id:"main-examList"
+                },{
+                    name:"",
+                    path:"/main/examEdit",
+                    component:ExamEdit,
+                    view_id:"main-examEdit"
+                },
+                {
+                    name:"",
+                    path:"/main/examDetail",
+                    component:ExamDetail,
+                    view_id:"main-examDetail"
                 },
             ]
          },
@@ -130,11 +135,17 @@ export default {
                     view_id:"main-grade"
                 },
                 {
-                    name:"",
-                    path:"/main/grades",
+                    name:"router.marking.wait",
+                    path:"/main/pages",
                     component:Page,
-                    view_id:"main-grade44444"
-                }
+                    view_id:"main-gradessssssssssss"
+                },
+                {
+                    name:"router.marking.excel",
+                    path:"/main/excle",
+                    component:Excel,
+                    view_id:"main-grade"
+                },
             ]
          },
     ]
