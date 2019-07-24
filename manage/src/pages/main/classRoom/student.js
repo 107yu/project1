@@ -19,14 +19,6 @@ function StudentMange(props) {
         showQuickJumper:true,
         showSizeChanger:true,
     }
-    useEffect(()=>{
-        if(props.deleteState===1){
-            message.success('删除成功');
-            props.record()
-            props.getHasStudent()
-            props.getHasNoStudent()
-        }
-    },[props.deleteState])
     //点击重置：
     let reset=()=>{
         props.form.resetFields();
@@ -42,6 +34,14 @@ function StudentMange(props) {
     let search=()=>{
         handleSubmit()
     }
+       useEffect(()=>{
+        if(props.deleteState===1){
+            message.success('删除成功');
+            props.record()
+        }
+        props.getHasStudent()
+        props.getHasNoStudent()
+    },[props.deleteState])
     const { getFieldDecorator } = props.form;
     const { Column} = Table;
 	return (
@@ -140,7 +140,7 @@ const mapDispatchToProps = dispatch => {
 				type: "student/getNoRoomstudents",
 			})
         },
-         //所有没有班级的学生
+         //
 		deleteStudent: (payload) => {
 			dispatch({
                 type: "student/deleteStudent",
@@ -151,7 +151,6 @@ const mapDispatchToProps = dispatch => {
 		record: () => {
 			dispatch({
                 type: "student/record",
-                payload:-1,
 			})
 		},
 	}

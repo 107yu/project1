@@ -32,7 +32,6 @@ function Room(props){
       ];
     const [flag, setFlag] = useState(false);
     const { getFieldDecorator } =props.form;
-
     //设置弹框
     const addFn=()=>{
         setFlag(true)
@@ -40,12 +39,10 @@ function Room(props){
     const hideModal=()=>{
         setFlag(false)
     }
-
     //获取初始教室数据
     useEffect(()=>{
         setDataSource(props.roomData)
     },[props.roomData])
-
     //显示弹框信息
     useEffect(()=>{
         if(props.room_msg===1){

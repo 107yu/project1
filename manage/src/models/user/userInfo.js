@@ -14,7 +14,7 @@ export default {
     },
     effects: {
     //获取用户id
-    *getUserId({  }, {put }) {  // eslint-disable-line
+    *getUserId({payload=null}, {put }) {  // eslint-disable-line
       let data=yield  getIdentity()
       yield put({
           type:"getIdentity",
@@ -22,7 +22,7 @@ export default {
       })
     },
     //获取所有接口
-    *getApiPort({}, {put }){
+    *getApiPort({payload=null}, {put }){
         let data=yield getApi()
         yield put({
           type:"authorition",
@@ -31,7 +31,7 @@ export default {
 
     },
     //获取所有视图
-    *getView({}, {put}){
+    *getView({payload=null}, {put}){
       let data=yield getView()
       yield put({
         type:"viewAuthorition",
@@ -40,7 +40,7 @@ export default {
 
     },
     //获得所有用户信息
-    *getAllUser({}, { put }){
+    *getAllUser({payload=null}, { put }){
       let data=yield getUserIdentity()
       yield put({
         type:"getUser",

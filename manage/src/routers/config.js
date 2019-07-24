@@ -1,21 +1,66 @@
-import AddQuestion from "../pages/main/question/addQuestion"
-import QuestionType from "../pages/main/question/questionsType"
-import Questions from "../pages/main/question/questions/questions"
-import WatchQuestion from "../pages/main/question/checkTheitem"
+// import AddQuestion from "../pages/main/question/addQuestion"
+// import QuestionType from "../pages/main/question/questionsType"
+// import Questions from "../pages/main/question/questions/questions"
+// import WatchQuestion from "../pages/main/question/checkTheitem"
 
-import AddUser from "../pages/main/user/addUser"
-import ShowUser from "../pages/main/user/showUser"
+// import AddUser from "../pages/main/user/addUser"
+// import ShowUser from "../pages/main/user/showUser"
 
-import AddExam from "../pages/main/exam/addexam/addExam"
-import ExamList from "../pages/main/exam/examList/eaxmList"
-import ExamEdit from "../pages/main/exam/addexam/examEdit"
-import ExamDetail from "../pages/main/exam/examList/examDetail"
-
-import Grade from "../pages/main/classRoom/grade"
-import Room from "../pages/main/classRoom/room"
-import Student from "../pages/main/classRoom/student"
-import Page from '../pages/main/checking/page';
-import Excel from "../pages/main/checking/excel"
+// import AddExam from "../pages/main/exam/addexam/addExam"
+// import ExamList from "../pages/main/exam/examList/eaxmList"
+// import ExamEdit from "../pages/main/exam/addexam/examEdit"
+// import ExamDetail from "../pages/main/exam/examList/examDetail"
+// import Grade from "../pages/main/classRoom/grade"
+// import Room from "../pages/main/classRoom/room"
+// import Student from "../pages/main/classRoom/student"
+// import Page from '../pages/main/checking/page';
+// import Excel from "../pages/main/checking/excel"
+import dynamic from 'dva/dynamic';
+const AddQuestion = dynamic({
+    component: () => import("../pages/main/question/addQuestion"),
+});
+const QuestionType = dynamic({
+    component: () => import("../pages/main/question/questionsType"),
+});
+const Questions = dynamic({
+    component: () => import("../pages/main/question/questions/questions"),
+});
+const WatchQuestion = dynamic({
+    component: () => import("../pages/main/question/checkTheitem"),
+});
+const AddUser = dynamic({
+    component: () => import("../pages/main/user/addUser"),
+});
+const ShowUser = dynamic({
+    component: () => import("../pages/main/user/showUser"),
+});
+const AddExam = dynamic({
+    component: () => import("../pages/main/exam/addexam/addExam"),
+});
+const ExamList = dynamic({
+    component: () => import("../pages/main/exam/examList/eaxmList"),
+});
+const ExamEdit = dynamic({
+    component: () => import("../pages/main/exam/addexam/examEdit"),
+});
+const ExamDetail = dynamic({
+    component: () => import("../pages/main/exam/examList/examDetail"),
+});
+const Grade = dynamic({
+    component: () => import("../pages/main/classRoom/grade"),
+});
+const Room = dynamic({
+    component: () => import("../pages/main/classRoom/room"),
+});
+const Student = dynamic({
+    component: () => import("../pages/main/classRoom/student"),
+});
+const Page = dynamic({
+    component: () => import('../pages/main/checking/page'),
+});
+const Excel = dynamic({
+    component: () => import("../pages/main/checking/excel"),
+});
 //配置；路由表：
 export default {
     routes:[

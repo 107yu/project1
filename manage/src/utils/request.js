@@ -1,13 +1,11 @@
 import axios from 'axios'
 import { getToken } from "../utils/index";
-import { message } from 'antd';
 // create an axios instance
 const service = axios.create({
-  baseURL: 'http://169.254.12.157:7001/',
+  baseURL: 'https://exam.jasonandjay.com',
   // withCredentials: true, // 跨域请求时发送 cookies
   timeout: 5000 // request timeout
 })
-
 // request interceptor
 service.interceptors.request.use(
   config => {

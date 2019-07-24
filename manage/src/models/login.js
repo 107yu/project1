@@ -87,7 +87,6 @@ export default {
       return { ...state, userInfo:{} };
     },
     updateViewAuthority(state,action){//把配置的路由表进行分类
-      console.log(action.payload)
       let myView=[];
       let forbiddenView=[];
       //遍历配置的路由表---如果路由表里的子项与用户的权限匹配----如果不匹配
@@ -105,7 +104,6 @@ export default {
         })
         myView.push(obj)
       })
-      console.log(myView,forbiddenView)
       return {...state,myView,forbiddenView}
     }
   },

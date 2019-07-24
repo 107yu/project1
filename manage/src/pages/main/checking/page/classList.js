@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react"
-import { Modal, Button,Table,Input,message,Form,Popconfirm} from 'antd';
+import { Modal,Table,Input,message,Form,} from 'antd';
 import {connect} from "dva"
 import "../../question/question.css"
 

@@ -36,7 +36,7 @@ export default {
        
       },
       *delRoom({ payload }, { call, put }) {  // eslint-disable-line
-        let data=yield call(DelRoom,payload) 
+        // let data=yield call(DelRoom,payload) 
         //把值返回去
         // yield put({
         //     type:"Room_Msg",
