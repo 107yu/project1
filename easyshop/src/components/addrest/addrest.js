@@ -21,6 +21,7 @@ class Addrest extends React.Component {
             province_id: null,//省
             city_id:null,//城市
             district_id: null,//区
+            id:null,
         }
     }
     componentDidMount(){
@@ -35,6 +36,7 @@ class Addrest extends React.Component {
                 province_id:item.province_id,
                 city_id:item.city_id,
                 district_id:item.district_id,
+                id:item.id
             })
         }
     }
@@ -42,7 +44,7 @@ class Addrest extends React.Component {
         this.props.changeAddress()
     }
     confirm() {//确定
-        let {ids,name,mobile,address,is_default}=this.state
+        let {ids,name,mobile,address,is_default,id}=this.state
         if(name===""){
             Toast.fail('姓名不能为空', 1);
             return;
@@ -62,7 +64,8 @@ class Addrest extends React.Component {
             is_default:is_default,
             province_id:ids[0],
             city_id:ids[1],
-            district_id:ids[2]
+            district_id:ids[2],
+            id:id,
        })
        this.props.changeAddress()
     }

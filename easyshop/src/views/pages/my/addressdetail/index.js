@@ -43,8 +43,8 @@ class Addressdetail extends React.Component {
                             <div className='concatName'>{item.name}</div>
                             <div className='addressDetail' onClick={()=>{this.addresDo(item)}}>
                                 <div>{item.mobile}</div>
-                                <div className="addressDetail_address">{item.address}</div>
                                 <div className="addressDetail_address">{item.full_region}</div>
+                                <div className="addressDetail_address">{item.address}</div>
                             </div>
                             <div className='deleteAddress' onClick={()=>{this.delete(item.id)}}>
                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAALVBMVEVmZmZtbW1ubm5wcHCJiYmKioqOjo6Tk5OUlJSVlZXm5ubn5+fv7+/y8vL////PAON/AAAAa0lEQVQ4y2N4hwsw0F8mgIGBgRWrDAMIoMokMKADNoIy6O5gwCAHgUwoThkGEmWexiFTyDIP+JCpUZmBkXnqh0wRH9shA5dGBe4hSbxlRJJpqEGSOcmBJLMYJS9aIcm8noQkobluoModNAAADGfUnhuYO1kAAAAASUVORK5CYII=" alt="" />

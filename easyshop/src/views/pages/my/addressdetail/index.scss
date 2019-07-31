@@ -1,5 +1,8 @@
 #addressPage {
+  display: flex;
+  flex-direction: column;
   .addressList {
+    flex: 1;
     background-size: auto 5px;
     padding-top: .08rem;
     margin-top:1rem;
