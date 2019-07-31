@@ -1,6 +1,9 @@
 #addressPage {
+  width: 100%;
+  height: 92%;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
   .addressList {
     flex: 1;
     background-size: auto 5px;

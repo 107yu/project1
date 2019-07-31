@@ -66,5 +66,4 @@ class Addressdetail extends React.Component {
         </div>
     }
 }
-
 export default Addressdetail
