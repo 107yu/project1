@@ -9,23 +9,28 @@ class Addressdetail extends React.Component {
     constructor(){
         super()
         this.state={
-            isaddress:false
+            isaddress:false,
+            item:null,
         }
     }
     componentDidMount() {
         this.props.addres.getaddresData()
     }
-    addresDo() {//改变状态--添加地址--更改地址--
+    addresDo(item) {//改变状态--添加地址--更改地址--
         let { isaddress } = this.state;
         this.setState({
-            isaddress:!isaddress
+            isaddress:!isaddress,
+            item,
         })
+    }
+    delete(id){
+        this.props.addres.deleteAddress({id})
     }
     render() {
         let { getaddresList } = this.props.addres;
-        let { isaddress } = this.state;
+        let { isaddress,item } = this.state;
         if(isaddress){
-            return <Addrest {...this.props} changeAddress={()=>{this.addresDo()}}/>
+            return <Addrest {...this.props} changeAddress={()=>{this.addresDo()}} item={item}/>
         }
         return <div id='addressPage'>
             <Header {...this.props} title="地址管理"></Header>
@@ -36,12 +41,12 @@ class Addressdetail extends React.Component {
                         <div className={item.is_default?'isChooseAddress':''}></div>
                         <div className='addressMsg'>
                             <div className='concatName'>{item.name}</div>
-                            <div className='addressDetail'>
+                            <div className='addressDetail' onClick={()=>{this.addresDo(item)}}>
                                 <div>{item.mobile}</div>
                                 <div className="addressDetail_address">{item.address}</div>
                                 <div className="addressDetail_address">{item.full_region}</div>
                             </div>
-                            <div className='deleteAddress'>
+                            <div className='deleteAddress' onClick={()=>{this.delete(item.id)}}>
                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAALVBMVEVmZmZtbW1ubm5wcHCJiYmKioqOjo6Tk5OUlJSVlZXm5ubn5+fv7+/y8vL////PAON/AAAAa0lEQVQ4y2N4hwsw0F8mgIGBgRWrDAMIoMokMKADNoIy6O5gwCAHgUwoThkGEmWexiFTyDIP+JCpUZmBkXnqh0wRH9shA5dGBe4hSbxlRJJpqEGSOcmBJLMYJS9aIcm8noQkobluoModNAAADGfUnhuYO1kAAAAASUVORK5CYII=" alt="" />
                             </div>
                         </div>
@@ -63,21 +68,3 @@ class Addressdetail extends React.Component {
 }
 
 export default Addressdetail
-
-
-
-
-
-// <div className='addressMsg'>
-//                     <div className='concatName'>XXX</div>
-//                     <div className='addressDetail'>
-//                         <div>15026346812</div>
-//                         <div>XXXXXXX</div>
-//                         <div>XXXXXXX</div>
-//                     </div>
-//                 </div>
-//                 <div className='addAddress'>
-//                     <a className='am-button'>
-//                         <span>新建地址</span>
-//                     </a>
-//                 </div>

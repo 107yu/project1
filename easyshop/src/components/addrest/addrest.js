@@ -23,11 +23,26 @@ class Addrest extends React.Component {
             district_id: null,//区
         }
     }
+    componentDidMount(){
+        let {item}=this.props;
+        if(item){
+            this.setState({
+                arr:[item.province_name,item.city_name,item.district_name],
+                name:item.name,
+                mobile:item.mobile,
+                address:item.address,
+                is_default:item.is_default,
+                province_id:item.province_id,
+                city_id:item.city_id,
+                district_id:item.district_id,
+            })
+        }
+    }
     cancel() {//取消
         this.props.changeAddress()
     }
     confirm() {//确定
-        let {ids,name,mobile,address,is_default,province_id,city_id,district_id}=this.state
+        let {ids,name,mobile,address,is_default}=this.state
         if(name===""){
             Toast.fail('姓名不能为空', 1);
             return;
@@ -49,24 +64,25 @@ class Addrest extends React.Component {
             city_id:ids[1],
             district_id:ids[2]
        })
+       this.props.changeAddress()
     }
     pcickerChange(e){
-            let arr=[]
-           city.filter((item,index)=>{
-                if(item.value==e[0]){
-                    arr.push(item.label)
-                    item.children.filter((item,index)=>{
-                        if(item.value==e[1]){
-                            arr.push(item.label)
-                             item.children.filter((item,index)=>{
-                                if(item.value==e[2]){
-                                    arr.push(item.label)
-                                }
-                            })
-                        }
-                    })
-                }
-           })
+        let arr=[]
+        city.filter((item,index)=>{
+            if(item.value==e[0]){
+                arr.push(item.label)
+                item.children.filter((item,index)=>{
+                    if(item.value==e[1]){
+                        arr.push(item.label)
+                            item.children.filter((item,index)=>{
+                            if(item.value==e[2]){
+                                arr.push(item.label)
+                            }
+                        })
+                    }
+                })
+            }
+        })
         this.setState({
             arr:arr,
             ids:e
@@ -74,17 +90,10 @@ class Addrest extends React.Component {
     }
     changeName(e){//姓名
         this.setState({
-            name:e.target.vaule
-        })
-        this.setState({
             name:e.target.value
         })
     }
     changeMobile(e){//电话
-        if(/^\d*$/.test(e.target.value))
-        this.setState({
-            mobile:e.target.value
-        })
         if (/^[0-9]*$/.test(e.target.value)){
             this.setState({
                 mobile:e.target.value
@@ -95,12 +104,8 @@ class Addrest extends React.Component {
         this.setState({
             address:e.target.value
         })
-        this.setState({
-            address:e.target.value
-        })
     }
     changeDefault(){//改变选中状态
-       
         let {is_default}=this.state;
         this.setState({
             is_default:!is_default
@@ -159,13 +164,5 @@ class Addrest extends React.Component {
    
 }
 export default createForm()(Addrest)
-//正则：
-// if (v && !/^(([1-9]\d*)|0)(\.\d{0,2}?)?$/.test(v)) {
-//     if (v === '.') {
-//       return '0.';
-//     }
-//     return prev;
-//   }
-// let a=/^1[3456789]\d{9}$/.test(mobile)
-// console.log(a)
+
 
